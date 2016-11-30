@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./css/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/waves.min.css"/>
+    <link rel="stylesheet" href="./css/animate.css"/>
+    <link rel="stylesheet" href="./css/nativedroid2.css"/>
+    <link rel="stylesheet" href="./css/nativedroid2.color.purple.css"/>
+    <link rel="stylesheet" href="./css/index.css">
+
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *"/>
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/jquery-ui.js"></script>
+    <script type="text/javascript" src="./js/map.js"></script>
+    <script src="./js/jquery-mobile.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKDQLmv4uZSiAVD4fnL1xmGfUMLYvw1Oo&libraries=places&callback=initMap" async defer></script>
+    <script src="./js/jquery.cookie.js"></script>
+    <script src="./js/waves.min.js"></script>
+    <script src="./js/wow.min.js"></script>
+    <script src="./js/nativedroid2.js"></script>
+    <script src="./js/nd2settings.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+</head>
+
+<body>
+<div data-role="page" id="map-page" data-url="map-page">
+    <div data-role="header" data-postion="fixed">
+        <!--<h5></h5>-->
+        <!--<a href="index.html" class="ui-btn ui-btn-icon-right" data-transition="slideup">-->
+        <!--<i class="zmdi zmdi-home"></i>-->
+        <!--</a>-->
+        <ul data-role="tab" data-swipe="true" class="nd2Tabs">
+            <li data-tab="add" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px"
+                   onclick="findBanks()" href="#addpoolpage"><i class="zmdi zmdi-money"></i>
+                </a>
+            </li>
+            <!--<li data-tab="mypools" class="nav-item waves-effect waves-button waves-light">-->
+            <!--<a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"-->
+            <!--onclick=""><i class="zmdi zmdi-local-dining"></i></a>-->
+            <!--</li>-->
+            <!--<li data-tab="pools" class="nav-item waves-effect waves-button waves-light">-->
+            <!--<a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"-->
+            <!--onclick=""><i class="zmdi zmdi-local-atm"></i></a>-->
+            <!--</li>-->
+            <!--<li data-tab="pools" class="nav-item waves-effect waves-button waves-light">-->
+            <!--<a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"-->
+            <!--onclick=""><i class="zmdi zmdi-local-cafe"></i></i></a>-->
+            <!--</li>-->
+            <!--<li data-tab="news" class="nav-item waves-effect waves-button waves-light">-->
+            <!--<a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"><i-->
+            <!--class="zmdi zmdi-local-bar"></i></a>-->
+            <!--</li>-->
+        </ul>
+    </div>
+
+    <div data-role="popup" id="locationpopup">
+        <button onclick="findBanks()">error</button>
+    </div>
+
+    <div id="map">
+        <!--map loads here...-->
+    </div>
+
+
+</div>
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKDQLmv4uZSiAVD4fnL1xmGfUMLYvw1Oo&libraries=places&callback=initMap" async defer></script>-->
+<script type="text/javascript" src="cordova.js"></script>
+</body>
+
+</html>
