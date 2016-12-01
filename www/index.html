@@ -5,10 +5,8 @@
 <head>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="./css/jquery.mobile.min.css"/>
-    <link rel="stylesheet" href="./css/waves.min.css"/>
-    <link rel="stylesheet" href="./css/animate.css"/>
-    <link rel="stylesheet" href="./css/nativedroid2.css"/>
-    <link rel="stylesheet" href="./css/nativedroid2.color.purple.css"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/index.css">
 
     <meta charset="utf-8"/>
@@ -19,7 +17,7 @@
     <meta http-equiv="Content-Security-Policy"
           content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *"/>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAljsf03ZCTrvAomMzxirp_KLlc6IXtk4s&callback&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAljsf03ZCTrvAomMzxirp_KLlc6IXtk4s&&callback=initMap"
             async defer></script>
     <script src="./js/jquery.js"></script>
     <script src="./js/jquery-ui.js"></script>
@@ -30,17 +28,17 @@
     <script src="./js/wow.min.js"></script>
     <script src="./js/nativedroid2.js"></script>
     <script src="./js/nd2settings.js"></script>
-    <script type="text/javascript" src="./js/index.js"></script>
+    <!--<script type="text/javascript" src="./js/index.js"></script>-->
 </head>
 
 <body>
 
 <div data-role="page" id="loginpage">
-    <div data-role="header">
+    <div data-role="header" style="background-color: #337AB7">
         <h1></h1>
-        <a href="index.html" class="ui-btn ui-btn-icon-right" data-transition="slideup">
-            <i class="zmdi zmdi-home"></i>
-        </a>
+        <!--<a href="index.html" class="ui-btn ui-btn-icon-right" data-transition="slideup">-->
+        <!--<i class="fa fa-cog"></i>-->
+        <!--</a>-->
     </div>
 
     <div data-role="popup" id="ll" class="ui-content">
@@ -69,7 +67,7 @@
         <div class="row">
             <div class="col-xs-4">
                 <a data-role="button" id="loginbutton" onclick="loadMap()"
-                   style="color: #fff; background-color: #9C27B0; width: 30%">Login</a>
+                   style="color: #fff; background-color: #337AB7; width: 30%">Login</a>
             </div>
 
             <div class="col-xs-4"></div>
@@ -82,22 +80,6 @@
         </div>
     </div>
 </div>
-
-<!--<div data-role="page" id="mappage">-->
-<!--<div data-role="header">-->
-<!--<h1></h1>-->
-<!--<a href="index.html" class="ui-btn ui-btn-icon-right">-->
-<!--<i class="zmdi zmdi-home"></i>-->
-<!--</a>-->
-<!--</div>-->
-
-<!--<div>-->
-<!--&lt;!&ndash;<div id="map"></div>&ndash;&gt;-->
-<!--&lt;!&ndash;<div id="banks">&ndash;&gt;-->
-<!--&lt;!&ndash;<a data-role="button">hjhj</a>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--</div>-->
-<!--</div>-->
 
 <script type="text/javascript" src="cordova.js"></script>
 </body>

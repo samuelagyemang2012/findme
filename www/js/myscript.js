@@ -41,7 +41,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 
 function loadMap() {
-    window.location.href = 'test.html';
+    window.location.href = 'map.html';
 }
 
 function findBanks() {
