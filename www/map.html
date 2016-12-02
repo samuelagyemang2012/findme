@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="./css/jquery.mobile.min.css"/>
     <script src="./js/jquery.js"></script>
-
+    <!--<script src="./js/map.js"></script>-->
     <script src="./js/jquery.cookie.js"></script>
 
     <style>
@@ -57,7 +57,7 @@
                         title: "Greetings!"
                     });
 
-                    marker.addListener('click', function() {
+                    marker.addListener('click', function () {
                         infowindow.open(map, marker);
                     });
 //                    var service = new google.maps.places.PlacesService(map);
@@ -81,13 +81,14 @@
             });
         }
 
-        function findPlace(someplace){
+        function findPlace(someplace) {
+//            test();
             if (navigator.geolocation) {
 
                 function success(pos) {
 //                    lt
-//                    var loc = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                    var loc = new google.maps.LatLng(-33.867, 151.195);
+                    var loc = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+//                    var loc = new google.maps.LatLng(-33.867, 151.195);
 //
                     map = new google.maps.Map(document.getElementById('map'), {
                         center: loc,
@@ -161,23 +162,34 @@
 <div class="btn-group">
     <button type="button" class="btn btn-primary" onclick="findPlace('bank')"><i class="fa fa-bank"></i></button>
     <button type="button" class="btn btn-primary" onclick="findPlace('atm')"><i class="fa fa-money"></i></button>
-    <button type="button" class="btn btn-primary" onclick="findPlace('restaurant')"><i class="fa fa-cutlery"></i></button>
+    <button type="button" class="btn btn-primary" onclick="findPlace('restaurant')"><i class="fa fa-cutlery"></i>
+    </button>
     <!--<button type="button" class="btn btn-primary" onclick="findPlace('hotel')"><i class="fa fa-hotel"></i></button>-->
-    <button type="button" class="btn btn-primary" onclick="findPlace('university')"><i class="fa fa-graduation-cap"></i></button>
+    <button type="button" class="btn btn-primary" onclick="findPlace('university')"><i class="fa fa-graduation-cap"></i>
+    </button>
     <button type="button" class="btn btn-primary" onclick="findPlace('hospital')"><i class="fa fa-medkit"></i></button>
-    <button type="button" class="btn btn-primary" onclick="findPlace('shopping_mall')"><i class="fa fa-shopping-cart"></i></button>
+    <button type="button" class="btn btn-primary" onclick="findPlace('shopping_mall')"><i
+            class="fa fa-shopping-cart"></i></button>
     <button type="button" class="btn btn-primary" onclick="findPlace('cafe')"><i class="fa fa-coffee"></i></button>
     <button type="button" class="btn btn-primary" onclick="findPlace('airport')"><i class="fa fa-plane"></i></button>
     <button type="button" class="btn btn-primary" onclick="findPlace('bus_station')"><i class="fa fa-bus"></i></button>
-    <button type="button" class="btn btn-primary" onclick="findPlace('train_station')"><i class="fa fa-train"></i></button>
+    <button type="button" class="btn btn-primary" onclick="findPlace('train_station')"><i class="fa fa-train"></i>
+    </button>
     <button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>
-    <button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>
-    <button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>
-    <button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>
-    <button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>
-    <button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>
-    <button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>
+    <!--<button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>-->
+    <!--<button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>-->
+    <!--<button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>-->
+    <!--<button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>-->
+    <!--<button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>-->
+    <!--<button type="button" class="btn btn-primary" onclick="findPlace('church')"><i class="fa fa-venus"></i></button>-->
     <!--<h5>f</h5>-->
+</div>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<div class="btn-group">
+    <!--<button type="button" class="btn btn-primary" onclick=""><i class="fa fa-star"></i></button>-->
+    <!--<button type="button" class="btn btn-primary" onclick=""><i class="fa fa-cog"></i></button>-->
+    <a href="index.html" type="button" class="btn btn-primary" onclick=""><i class="fa fa-home"></i></a>
 </div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKDQLmv4uZSiAVD4fnL1xmGfUMLYvw1Oo&libraries=places&callback=initMap"
