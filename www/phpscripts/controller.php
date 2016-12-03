@@ -19,6 +19,14 @@ if (isset($_REQUEST['cmd'])) {
             temporal_sign_up();
             break;
 
+        case 2:
+            sign_up();
+            break;
+
+        case 3:
+            login();
+            break;
+
 
         default:
             break;
@@ -56,5 +64,41 @@ function temporal_sign_up()
 
 function sign_up()
 {
+    $user = new User();
 
+    $usercode = $_GET['code'];
+
+    $user_email = $user->get_email_from_code($usercode);
+
+    if ($user_email == $_SESSION['email']) {
+
+        $bool = $user->sign_up($_SESSION['username'], $_SESSION['password'], $_SESSION['email'], $_SESSION['phone']);
+
+        if ($bool == true) {
+            echo '{"result":1}';
+        } else {
+            echo '{"result":0}';
+        }
+    }
+}
+
+function login()
+{
+    $user = new User();
+
+    $email = $_GET['email'];
+    $password = $_GET['password'];
+
+    $data = $user->login($email, $password);
+
+    $row = $data->fetch_assoc();
+
+    $r_email = $row['email'];
+    $r_pass = $row['password'];
+
+    if ($email == $r_email && $password === $r_pass) {
+        echo '{"result":1}';
+    } else {
+        echo '{"result":0}';
+    }
 }

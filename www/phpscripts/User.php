@@ -35,7 +35,9 @@ class User extends Adb
 
         $url = "http://52.89.116.249:13013/cgi-bin/sendsms?username=mobileapp&password=foobar&to=" . $phone . "&from=" . $ll . "&text=Your+verification+code+is+" . $c;
         $curl = curl_init($url);
-        curl_exec($curl);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+        $reponse = curl_exec($curl);
         curl_close($curl);
     }
 
@@ -56,7 +58,10 @@ class User extends Adb
         $s = $this->prepare($query);
         $s->bind_param('i', $code);
         $s->execute();
-        return $s->get_result();
+        $data = $s->get_result();
+        $row = $data->fetch_assoc();
+        $email = $row['email'];
+        return $email;
     }
 
     public function login($email, $password)
@@ -64,10 +69,10 @@ class User extends Adb
         $query = "SELECT email,password FROM users WHERE email=? AND password=?";
         $s = $this->prepare($query);
         $s->bind_param('ss', $email, $password);
-        $bool = $s->execute();
-        return $bool;
+        $s->execute();
+        return $s->get_result();
     }
 }
 
 //$u = new User();
-//$u->send_code("1232", 233542688902);
+//$u->get_email_from_code(1232);

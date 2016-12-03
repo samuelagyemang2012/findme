@@ -41,7 +41,7 @@
         </div>
 
         <div>
-            <input type="text" id="username" placeholder="Username" style="text-align: center" required>
+            <input type="text" id="email" placeholder="Email" style="text-align: center" required>
         </div>
 
         <div>
@@ -51,7 +51,7 @@
         <br>
         <br>
         <div>
-            <a data-role="button" id="loginbutton" onclick="loadMap()"
+            <a data-role="button" id="loginbutton" onclick="login()"
                style="color: #fff; background-color: #337AB7; width: 30%">Login
             </a>
         </div>
@@ -86,7 +86,7 @@
         </div>
 
         <div>
-            <input type="tel" id="s_phone" placeholder="Phone number" required>
+            <input type="tel" id="s_phone" placeholder="eg.233123456789" required>
         </div>
 
         <div>
@@ -113,6 +113,14 @@
         </a>
     </div>
 
+    <div data-role="popup" id="verified" class="ui-content">
+        <h4 style="color: #337AB7">Sign-up successful !</h4>
+    </div>
+
+    <div data-role="popup" id="notverified" class="ui-content">
+        <h4 style="color: #4CAF50">Invalid verification code</h4>
+    </div>
+
     <div data-role="content">
 
         <div class="align-center">
@@ -123,7 +131,7 @@
         </div>
 
         <div>
-            <a data-role="button" id="verifybutton" onclick=""
+            <a data-role="button" id="verifybutton" onclick="true_sign_up()"
                style="color: #fff; background-color: #337AB7; width: 30%">Verify
             </a>
         </div>
