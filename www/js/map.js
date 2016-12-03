@@ -52,6 +52,7 @@ function true_sign_up() {
             function () {
                 change_page("#loginpage", "slide")
             }, 800);
+
     } else {
         $("#notverified").popup("open", {transition: "pop"});
     }
@@ -69,9 +70,24 @@ function login() {
     result = send_request(url);
 
     if (result.result == 1) {
+        $.cookie('email', email);
         loadMap();
     }
     else {
         $("#ll").popup("open", {transition: "pop"});
     }
 }
+
+function getLocation() {
+    var latitude, longitude, email, url;
+
+    email = $.cookie('email');
+    latitude = $.cookie('latitude');
+    longitude = $.cookie('longitude');
+
+    url = "./phpscripts/controller.php?cmd=4&email=" + email + "&latitude=" + latitude + "&longitude=" + longitude;
+
+    send_request(url);
+
+}
+

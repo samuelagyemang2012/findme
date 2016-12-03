@@ -42,11 +42,11 @@ class User extends Adb
     }
 
 
-    public function sign_up($username, $password, $email, $phone)
+    public function sign_up($username, $password, $email, $phone, $ls, $lt)
     {
-        $query = "INSERT INTO users(username,email,password,phone) VALUES (?,?,?,?)";
+        $query = "INSERT INTO users(username,email,password,phone,last_seen,last_time) VALUES (?,?,?,?,?,?)";
         $s = $this->prepare($query);
-        $s->bind_param('sssi', $username, $email, $password, $phone);
+        $s->bind_param('ssssss', $username, $email, $password, $phone, $ls, $lt);
         $bool = $s->execute();
         return $bool;
     }
@@ -72,7 +72,20 @@ class User extends Adb
         $s->execute();
         return $s->get_result();
     }
+
+    public function set_last_seen($email, $date, $time)
+    {
+        $query = "UPDATE users SET last_seen=?,last_time=? WHERE email=?";
+        $s = $this->prepare($query);
+        $s->bind_param('sss', $date, $time, $email);
+        $bool = $s->execute();
+        return $bool;
+    }
 }
 
+//$time = date("h:i:sa");
+//$date = date('Y-m-d');
+//
 //$u = new User();
-//$u->get_email_from_code(1232);
+//$u->set_last_seen("khermz2012@gmail.com", "awdadwadwaw", "dwadwaawdwa");
+//echo "done";

@@ -6,9 +6,10 @@
  * Time: 6:30 AM
  */
 session_start();
+$email = "";
 
 include_once "User.php";
-//include_once "Pool.php";
+include_once "Location.php";
 
 if (isset($_REQUEST['cmd'])) {
 
@@ -27,6 +28,9 @@ if (isset($_REQUEST['cmd'])) {
             login();
             break;
 
+        case 4:
+            getLocation();
+            break;
 
         default:
             break;
@@ -72,13 +76,13 @@ function sign_up()
 
     if ($user_email == $_SESSION['email']) {
 
-        $bool = $user->sign_up($_SESSION['username'], $_SESSION['password'], $_SESSION['email'], $_SESSION['phone']);
+        $bool = $user->sign_up($_SESSION['username'], $_SESSION['password'], $_SESSION['email'], $_SESSION['phone'], "null", "null");
 
         if ($bool == true) {
             echo '{"result":1}';
-        } else {
-            echo '{"result":0}';
         }
+    } else {
+        echo '{"result":0}';
     }
 }
 
@@ -101,4 +105,21 @@ function login()
     } else {
         echo '{"result":0}';
     }
+}
+
+function getLocation()
+{
+    $loc = new Location();
+    $user = new User();
+
+    date_default_timezone_set('UTC');
+    $date = date('Y-m-d');
+    $time = date("h:i:sa");
+
+    $email = $_GET['email'];
+    $latitude = $_GET['latitude'];
+    $longitude = $_GET['longitude'];
+    $user->set_last_seen($email, $date, $time);
+    $loc->get_location($email, $latitude, $longitude, $date, $time);
+
 }
