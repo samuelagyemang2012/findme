@@ -10,6 +10,7 @@ $email = "";
 
 include_once "User.php";
 include_once "Location.php";
+include_once "Rating.php";
 
 if (isset($_REQUEST['cmd'])) {
 
@@ -30,6 +31,14 @@ if (isset($_REQUEST['cmd'])) {
 
         case 4:
             getLocation();
+            break;
+
+        case 5:
+            rate();
+            break;
+
+        case 6:
+            view_rating();
             break;
 
         default:
@@ -122,4 +131,49 @@ function getLocation()
     $user->set_last_seen($email, $date, $time);
     $loc->get_location($email, $latitude, $longitude, $date, $time);
 
+}
+
+function rate()
+{
+    $rating = new Rating();
+
+    $email = $_GET['email'];
+    $rate = $_GET['rating'];
+    $com = $_GET['comments'];
+
+    $has_rated = $rating->check_if_rated($email);
+
+    if ($has_rated <= 0) {
+        $rating->rate($email, $rate, $com);
+        echo '{"result":1}';
+    } else {
+        echo '{"result":0}';
+    }
+}
+
+function view_rating()
+{
+    $rating = new Rating();
+
+    $co = $rating->get_count();
+
+    if ($co == 0) {
+        echo '{"result": 0}';
+    } else {
+        $ra = $rating->get_rating();
+        $results = $rating->get_comments();
+        $rows = $results->fetch_assoc();
+
+        echo '{"result": 1,"rating":' . $ra . ',"count":' . $co . ', "comment":[';
+
+        while ($rows) {
+            echo json_encode($rows);
+            $rows = $results->fetch_assoc();
+
+            if ($rows) {
+                echo ",";
+            }
+        }
+        echo "]}";
+    }
 }
