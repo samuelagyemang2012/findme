@@ -138,3 +138,7 @@
     color: #337AB7;
 
 }
+
+.noboundary{
+    border: 0px;
+}

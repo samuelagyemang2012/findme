@@ -134,7 +134,7 @@ function get_rating() {
         for (var i in result.comment) {
             build += "<blockquote>";
             build += "<h5>" + result.comment[i].email + "</h5>";
-            build += "<p>" + result.comment[i].comments + "</p>";
+            build += "<p style='color: #3498DB'>" + result.comment[i].comments + "</p>";
             build += "</blockquote>";
         }
 
