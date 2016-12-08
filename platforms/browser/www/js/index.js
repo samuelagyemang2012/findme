@@ -43,7 +43,7 @@ var app = {
 
         $(function () {
             "use strict";
-            $("#news").click(function () {
+            $("#login").click(function () {
 
                 alert("news clicked");
                 //cordova.plugins.barcodeScanner.scan(

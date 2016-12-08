@@ -1,47 +1,148 @@
-/**
- * Created by samuel on 11/28/2016.
- */
+function loadMap() {
+    window.open("map.html", "_parent");
+}
 
-/*
- * Google Maps documentation: http://code.google.com/apis/maps/documentation/javascript/basics.html
- * Geolocation documentation: http://dev.w3.org/geo/api/spec-source.html
- */
-$( document ).on( "pageinit", "#map-page", function() {
-    var defaultLatLng = new google.maps.LatLng(34.0983425, -118.3267434);  // Default to Hollywood, CA when no geolocation support
-    if ( navigator.geolocation ) {
-        function success(pos) {
-            // Location found, show map with these coordinates
-            drawMap(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-        }
-        function fail(error) {
-            drawMap(defaultLatLng);  // Failed to find location, show default map
-        }
-        // Find the users current position.  Cache the location for 5 minutes, timeout after 6 seconds
-        navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 500000, enableHighAccuracy:true, timeout: 6000});
+function send_request(url) {
+    "use strict";
+    var obj, result;
+    obj = $.ajax({
+        url: url,
+        async: false
+    });
+    result = $.parseJSON(obj.responseText);
+    return result;
+}
+
+function change_page(page, transition) {
+    $.mobile.pageContainer.pagecontainer("change", page, {transition: transition});
+}
+
+function fake_sign_up() {
+    var username, password, email, phone, url, result;
+
+    username = $("#s_username").val();
+    password = $("#s_password").val();
+    email = $("#s_email").val();
+    phone = $("#s_phone").val();
+
+    url = "./phpscripts/controller.php?cmd=1&username=" + username + "&password=" + password + "&email=" + email + "&phone=" + phone;
+
+    result = send_request(url);
+    //change_page("#verifypage", "slide");
+
+    if (result.result == 1) {
+        change_page("#verifypage", "slide");
+    }
+}
+
+function true_sign_up() {
+    var code, url, result;
+
+    code = $("#code").val();
+
+    url = "./phpscripts/controller.php?cmd=2&code=" + code;
+
+    result = send_request(url);
+
+    if (result.result == 1) {
+        $("#verified").popup("open", {transition: "pop"});
+
+        setTimeout(
+            function () {
+                change_page("#loginpage", "slide")
+            }, 800);
+
     } else {
-        drawMap(defaultLatLng);  // No geolocation support, show default map
+        $("#notverified").popup("open", {transition: "pop"});
     }
-
-    function drawMap(latlng) {
-        var myOptions = {
-            zoom: 15,
-            center: latlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
-        // Add an overlay to the map of current lat/lng
-        var marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-            title: "Greetings!"
-        });
-    }
-});
-
-function loadMap(){
-    window.location.href = 'map.html';
+    //alert("dadsadsa");
 }
 
-function findbanks(){
+function login() {
+    var email, password, url, result;
 
+    email = $("#email").val();
+    password = $("#password").val();
+
+    url = "./phpscripts/controller.php?cmd=3&email=" + email + "&password=" + password;
+
+    result = send_request(url);
+
+    if (result.result == 1) {
+        $.cookie('email', email);
+        loadMap();
+    }
+    else {
+        $("#ll").popup("open", {transition: "pop"});
+    }
 }
+
+function getLocation() {
+    var latitude, longitude, email, url;
+
+    email = $.cookie('email');
+    latitude = $.cookie('latitude');
+    longitude = $.cookie('longitude');
+
+    url = "./phpscripts/controller.php?cmd=4&email=" + email + "&latitude=" + latitude + "&longitude=" + longitude;
+
+    send_request(url);
+}
+
+function rate() {
+    var result, rating, comment, url, email;
+    rating = $("#slider").val();
+    comment = $("#comments").val();
+    email = $.cookie('email');
+
+    url = "./phpscripts/controller.php?cmd=5&rating=" + rating + "&comments=" + comment + "&email=" + email;
+    result = send_request(url);
+
+    if (result.result == 1) {
+        $("#ratingdone").popup("open", {transition: "pop"});
+
+        setTimeout(
+            function () {
+                change_page("#loginpage", "slide")
+            }, 800);
+    }
+    else {
+        $("#ratingfailed").popup("open", {transition: "pop"});
+    }
+}
+
+function get_rating() {
+    var url, result, build;
+
+    url = "./phpscripts/controller.php?cmd=6";
+
+    result = send_request(url);
+
+    build = "";
+
+    if (result.result == 0) {
+        document.getElementById("usernum").innerHTML = 0;
+        document.getElementById("numrating").innerHTML = 0;
+        build += "<p>No comments yet</p>";
+
+        $("#content").html(build);
+        change_page("#viewratingspage", "slide");
+    } else {
+        document.getElementById("usernum").innerHTML = result.count;
+        document.getElementById("numrating").innerHTML = result.rating;
+
+        for (var i in result.comment) {
+            build += "<blockquote>";
+            build += "<h5>" + result.comment[i].email + "</h5>";
+            build += "<p style='color: #3498DB'>" + result.comment[i].comments + "</p>";
+            build += "</blockquote>";
+        }
+
+        $("#content").html(build);
+
+        change_page("#viewratingspage", "slide");
+    }
+}
+
+
+
